@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      post 'authenticate', to: 'authentication#authenticate'
+      resources :users, only: [:create]
       resources :transactions, only: [:index, :show, :create]
     end
   end
