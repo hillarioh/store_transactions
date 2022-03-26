@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 2022_03_26_035606) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "amount"
-    t.string "currency_from"
-    t.string "currency_to"
+    t.float "input_amount"
+    t.float "output_amount"
+    t.string "input_currency"
+    t.string "output_currency"
     t.datetime "date_of_transaction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
