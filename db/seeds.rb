@@ -18,3 +18,10 @@
     )
   end
 
+  5.times do
+    user = User.create(
+      username: Faker::Name.first_name, 
+      password: "1234567"
+    )
+  end
+
