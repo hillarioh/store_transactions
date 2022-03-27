@@ -14,7 +14,7 @@ class Api::V1::TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
 
     if @transaction.save
-      render json: @transaction, status: :created, location: @transaction
+      render json: @transaction, status: :created
     else
       render json: @transaction.errors, status: :unprocessable_entity
     end
@@ -26,6 +26,6 @@ class Api::V1::TransactionsController < ApplicationController
     end
 
     def transaction_params
-      params.require(:transaction).permit(:customer_id, :input_amount, :input_currency, :output_amount, :output_currency, :date_of_transaction)
+      params.permit(:customer_id, :input_amount, :input_currency, :output_amount, :output_currency, :date_of_transaction)
     end
 end
