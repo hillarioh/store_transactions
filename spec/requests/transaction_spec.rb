@@ -15,6 +15,14 @@ RSpec.describe 'Transaction', :type => :request do
         :output_amount=> 250.23,
         }
     }
+    let!(:input3) {   {:customer_id=> 1,
+        :input_amount=> 1000.12,
+        :output_amount=> 250.23,
+        :input_currency=> "EUR",
+        :output_currency=> "YEN",
+        :date_of_transaction=> DateTime.now()
+        }
+    }
     describe 'POST /api/v1/transactions' do
         it "succeeds if its authenticated and post transactions" do
             get_token
@@ -45,4 +53,13 @@ RSpec.describe 'Transaction', :type => :request do
             expect(response).to have_http_status(200)
         end
     end 
+    describe 'PUT /api/v1/transaction' do
+        it "updates with correct token and payload" do
+            get_token
+            token = JSON.parse(response.body)
+            put_transaction( '/api/v1/transactions/1',input3,token["auth_token"])
+            expect(response).to have_http_status(200)            
+        end
+        
+    end
 end

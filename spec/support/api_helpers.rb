@@ -8,6 +8,9 @@ module ApiHelpers
     def post_transaction(route, params = {},token={})
         post route, params: params, headers: headers(token)
     end
+    def put_transaction(route, params = {},token={})
+        put route, params: params, headers: headers(token)
+    end
     def get_token
         post '/api/v1/authenticate', params:  {username: "lucky", password: "12345"}
     end

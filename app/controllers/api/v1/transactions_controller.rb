@@ -1,5 +1,5 @@
 class Api::V1::TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show]
+  before_action :set_transaction, only: [:show, :update]
 
   def index
     @transactions = Transaction.all
@@ -16,6 +16,14 @@ class Api::V1::TransactionsController < ApplicationController
     if @transaction.save
       render json: @transaction, status: :created
     else
+      render json: @transaction.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @transaction.update(transaction_params)
+      render json: @transaction, status: :ok
+    else 
       render json: @transaction.errors, status: :unprocessable_entity
     end
   end
